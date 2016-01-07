@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="w3.css">
+
+<link rel="stylesheet" href="basic-style.css">
+<!--	<link rel="stylesheet" href="css/slider.css"> -->
+
+	<!-- bjqs.css contains the *essential* css needed for the slider to work -->
+	<link rel="stylesheet" href="bjqs.css">
+
+	<!-- some pretty fonts for this demo page - not required for the slider
+	<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:300' rel='stylesheet' type='text/css'> -->
+
+	<!-- demo.css contains additional styles used to set up this demo page - not required for the slider -->
+	<link rel="stylesheet" href="demo.css">
+
+	<!-- load jQuery and the plugin -->
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="js/bjqs-1.3.min.js"></script>
+
+
+<body >
+	<div  style='float: right';>
+		<a href="#" onclick="javascript:window.history.back(-1);">
+			<img style='width: 40%; height: 40%' src="img/close.ico">
+		</a>
+	</div>
+
+
+<div class="w3-container w3-orange"  border-bottom-color: red;>
+  <h1>Our Solar System</h1>
+
+</div>
+<div class="w3-row-padding">
+
+
+
+<div id="container_bis">
+
+	<!--  Outer wrapper for presentation only, this can be anything you like -->
+	<div id="banner-fade">
+
+		<!-- start Basic Jquery Slider -->
+		<ul class="bjqs">
+			<li><img src="img/ss_01.png" title="The Sun"></li>
+			<li><img src="img/ss_02.png" title="Mercury"></li>
+			<li><img src="img/ss_03.png" title="Venus"></li>
+			<li><img src="img/ss_04.png" title="Earth"></li>
+			<li><img src="img/ss_05.png" title="Moon"></li>
+			<li><img src="img/ss_06.png" title="Mars"></li>
+			<li><img src="img/ss_07.png" title="Asteroids"></li>
+			<li><img src="img/ss_08.png" title="Jupiter"></li>
+			<li><img src="img/ss_09.png" title="Saturn"></li>
+			<li><img src="img/ss_10.png" title="Uranus"></li>
+			<li><img src="img/ss_11.png" title="Neptune"></li>
+			<li><img src="img/ss_12.png" title="Comets"></li>
+		</ul>
+		<!-- end Basic jQuery Slider -->
+
+	</div>
+	<!-- End outer wrapper -->
+
+	<script class="secret-source">
+		jQuery(document).ready(function($) {
+
+			$('#banner-fade').bjqs({
+				height      : 320,
+				width       : 620,
+				usecaptions: false,
+				automatic: false,
+				showmarkers: false,
+				nexttext: '>',
+				prevtext: '<',
+				responsive  : true
+			});
+
+		});
+	</script>
+
+	<div class="w2-third">
+
+	  <p>The Solar System is made up of all
+			the planets that orbit our Sun.
+			In addition to planets, the Solar
+			System also consists of moons,
+			comets, asteroids,minor planets, and dust and gas.
+		  Everything in the Solar System orbits or revolves around the Sun.
+		  The Sun contains around 98% of all the material in the Solar System.
+
+	 </p>
+	</div>
+	</div>
+
+
+
+</body>
+</html>

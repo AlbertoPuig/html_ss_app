@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./css/w3.css">
+
+<link rel="stylesheet" href="./css/basic-style.map.css">
+<link href='http://fonts.googleapis.com/css?family=Droid+Serif|Ubuntu' rel='stylesheet' type='text/css'>
+<style>
+          /*  .map {
+                top: 50%; /* IMPORTANT
+                left: 50%; /* IMPORTANT
+                display: block;
+                width: 500px;
+                height: 400px;
+                position: absolute;
+                align: right;
+                margin-top: -208.5px; /* HALF OF THE HEIGHT
+                margin-left: -175px; /* HALF OF THE WIDTH
+
+            } */
+
+
+
+            .wrapper{
+                width: 90%;
+                margin: 0px auto;
+            }
+            #map {
+                height: 300px;
+                top: 20%;
+                left: 20%;
+                display: block;
+                width: 500px;
+                height: 400px;
+            }
+            .right {
+                background: orange;
+                width: 0px;
+                float: right;
+                height: 0px;
+            }
+
+
+          </style>
+
+<script src="http://maps.google.com/maps/api/js?sensor=false"
+        type="text/javascript"></script>
+
+<script>
+        function init(locations) {
+        //  alert("init");
+           xmlhttp = new XMLHttpRequest();
+           getdetails(locations);
+        }
+        function getdetails(locations) {
+          //  alert("inside getdetails function");
+            var empno = document.getElementById("empno");
+            var url = "https://api.wheretheiss.at/v1/satellites/25544";
+            xmlhttp.open('GET',url,true);
+            xmlhttp.send(null);
+            xmlhttp.onreadystatechange = function() {
+
+                if (xmlhttp.readyState == 4) {
+                  if ( xmlhttp.status == 200) {
+                      var det = eval( "(" +  xmlhttp.responseText + ")");
+                    //  alert("ISS LATITUEDE " + det.latitude);
+                    //  alert("ISS LATITUEDE " + det.longitude);
+                      locations[0][1] = det.latitude;
+                      locations[0][2] = det.longitude;
+                      mapMaker(locations);
+                      // x.innerHTML = "<br>" + "Name: " + det.name "<br>" + "id: " + det.id "<br>" + "latitude: " det.latitude;
+                      }
+                      else
+                            alert("Error ->" + xmlhttp.responseText);
+                     }
+                     };
+                     }
+
+
+          function mapMaker(locations){
+          //  alert("mapMaker in head");
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 1,
+              center: new google.maps.LatLng(30, 0),
+              mapTypeId: google.maps.MapTypeId.SATELLITE
+
+            });
+
+            var infowindow = new google.maps.InfoWindow();
+
+            var marker, i;
+
+            for (i = 0; i < locations.length; i++) {
+
+              marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                map: map, icon: locations[i][3]
+
+              });
+
+
+              google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+
+                  infowindow.setContent(locations[i][0]);
+                  infowindow.open(map, marker);
+                }
+              })(marker, i));
+            }
+
+          }
+</script>
+
+<body>
+  <div  style='float: right';>
+    <a href="#" onclick="javascript:window.history.back(-1);">
+      <img style='width: 40%; height: 40%' src="img/close.ico">
+    </a>
+  </div>
+
+<div class="w3-container w3-orange"  border-bottom-color: red;>
+  <h1>ISS Position</h1>
+</div>
+
+<div class="w3-row-padding">
+
+<div class="w3-third">
+
+
+  <h4>Purpose</h4>
+  <p>According to the original Memorandum of Understanding between NASA and Rosaviakosmos,
+     the International Space Station was intended to be a laboratory, observatory and factory
+     in low Earth orbit. It was also planned to provide transportation, maintenance,
+     and act as a staging base for possible future missions to the Moon, Mars and asteroids.
+     In the 2010 United States National Space Policy, the ISS was given additional roles of
+     serving commercial, diplomatic and educational purposes.</p>
+  <h4>Station Statistics</h4>
+  <p>- Launch 20 November 1998. <br>- Length 72.8 m (239 ft).
+  <br>- Width 108.5 m (356 ft). <br>- Height c. 20 m (c. 66ft).
+  <br>- Perigee 409 km (254mi). <br>- Apogee  416 km (258 mi).
+  <br>- Orbital inclination 51.65 degrees.
+  <br>- Average speed (27,600 km/h; 17,100 mph).</p>
+
+</div>
+
+<div class="w2-third">
+
+
+  <div class="wrapper">
+    <div id="map"></div>
+    <!-- <div class="right"></div> -->
+  </div>
+
+
+  <!-- <div position="relative"; overflow="hidden";>
+    <div id="map" class="map"   ></div>
+  </div> -->
+
+</div>
+
+
+</div>
+<script type="text/javascript">
+  var locations = [
+    ['ISS',  1.7862045717098, 155.51106158341,"./img/Iss3.gif"],
+    ['Reference position',  40.4169514,-3.7057172,""]
+  ];
+  var x = document.getElementById("demo");
+  init(locations);
+</script>
+</body>
+</html>

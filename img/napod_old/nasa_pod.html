@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="./css/w3.css">
+
+<link rel="stylesheet" href="./css/basic-style.css">
+
+<script language="javascript">
+var xmlhttp;
+function init() {
+//  alert("init");
+   xmlhttp = new XMLHttpRequest();
+   getdetails();
+}
+
+function getdetails() {
+  //  alert("inside getdetails function");
+    var empno = document.getElementById("empno");
+    var url = "https://api.nasa.gov/planetary/apod?concept_tags=True&api_key=DEMO_KEY";
+    xmlhttp.open('GET',url,true);
+    xmlhttp.send(null);
+    xmlhttp.onreadystatechange = function() {
+
+           if (xmlhttp.readyState == 4) {
+              if ( xmlhttp.status == 200) {
+                   var det = eval( "(" +  xmlhttp.responseText + ")");
+                   // alert(det.url);
+                   if (det.media_type == "image"){
+                    document.getElementById("Image").src = det.url;}
+                    document.getElementById("title_h1").innerHTML = det.title;
+                    document.getElementById("explanation").innerHTML = det.explanation;
+             }
+             else
+             {
+                   alert("Error ->" + xmlhttp.responseText);
+                   document.getElementById("title_h1").innerHTML = "Connection Error.";
+             }
+          }
+    };
+}
+
+</script>
+
+
+<body onload="init()">
+<div  style='float: right';>
+    <a href="#" onclick="javascript:window.history.back(-1);">
+      <img style='width: 40%; height: 40%' src="img/close.ico">
+    </a>
+</div>
+<div class="w3-container w3-orange"  border-bottom-color: red;>
+  <h1>Astronomy Picture of the Day - Nasa</h1>
+</div>
+
+<div class="w3-row-padding">
+
+<div class="w3-third">
+  <h1 id="title_h1"></h1>
+  <p id="explanation">       </p>
+</div>
+
+<div class="w2-third">
+  <img id="Image">
+</div>
+
+
+</div>
+
+</body>
+</html>
