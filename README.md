@@ -8,3 +8,5 @@ CSS3, API REST, javascript, Google Maps API.
 * International space station current position (globe map)
 * Solar System info
 
+<img src="/img/NASA_logo.png"><img src="/img/iss_logo.jpg">
+
